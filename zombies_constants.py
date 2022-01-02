@@ -1,0 +1,1 @@
+ZOMBIE_SPEED = 5
