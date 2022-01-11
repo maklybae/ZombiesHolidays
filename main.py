@@ -2,6 +2,9 @@ import pygame
 from constants import *
 import hero
 from groups import *
+import zombies
+from random import randint
+from groups import *
 
 pygame.init()
 screen = pygame.display.set_mode(SIZE)
@@ -9,7 +12,6 @@ screen = pygame.display.set_mode(SIZE)
 
 pygame.display.set_caption('ZombiesHolidays')
 running = True
-
 clock = pygame.time.Clock()
 hero = hero.Hero()
 while running:
