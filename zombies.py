@@ -2,13 +2,14 @@ import pygame
 from zombies_constants import *
 from random import randint
 from constants import WIDTH
+from groups import *
 
 
 class Zombie(pygame.sprite.Sprite):  # класс стандартного зомби
     image = pygame.Surface((20, 20))  # zombie image
 
     def __init__(self, *groups):
-        super().__init__(*groups)
+        super().__init__(all_sprites, zombies_group, *groups)
         self.image = Zombie.image
         self.image.fill(pygame.Color("red"))  # temp
         self.rect = self.image.get_rect()
