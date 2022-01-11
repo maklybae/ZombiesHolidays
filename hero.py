@@ -15,10 +15,10 @@ class Hero(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
 
     def left(self):
-        self.rect = self.rect.move(-3, 0)
+        self.rect = self.rect.move(-MOVING_SPEED, 0)
 
     def right(self):
-        self.rect = self.rect.move(3, 0)
+        self.rect = self.rect.move(MOVING_SPEED, 0)
 
     def shoot(self):
         Bullet((self.rect.x, self.rect.y - 10))

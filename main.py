@@ -3,7 +3,6 @@ from constants import *
 import hero
 from groups import *
 import zombies
-from random import randint
 from groups import *
 
 pygame.init()
