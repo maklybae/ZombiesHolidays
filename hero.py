@@ -15,9 +15,13 @@ class Hero(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
 
     def left(self):
+        if self.rect.x < 0:
+            return
         self.rect = self.rect.move(-MOVING_SPEED, 0)
 
     def right(self):
+        if self.rect.x + self.rect.width > WIDTH:
+            return
         self.rect = self.rect.move(MOVING_SPEED, 0)
 
     def shoot(self):

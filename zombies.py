@@ -3,6 +3,7 @@ from zombies_constants import *
 from random import randint
 from constants import WIDTH
 from groups import *
+from constants import *
 
 
 class Zombie(pygame.sprite.Sprite):  # класс стандартного зомби
@@ -24,6 +25,10 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
         if self.hp <= 0:
             self.kill()
             return
+        if self.rect.bottom >= HEIGHT:
+            # game over !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            self.kill()
+            return
         if self.ticks >= ZOMBIE_SPEED:
             self.ticks = 0
             self.rect = self.rect.move(self.dx, self.dy)
@@ -32,6 +37,7 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
 
     def take_damage(self, damage):
         self.hp -= damage
+
 
 class ZombieFather(Zombie):
     image = pygame.Surface((50, 50))  # zombie image
