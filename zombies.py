@@ -35,5 +35,6 @@ class ZombieFather(Zombie):
         super().__init__(*groups)
         self.image = ZombieFather.image
         self.rect = self.image.get_rect()
+        self.rect.x = randint(0, WIDTH - self.rect.width)
+        self.rect.y = 0
         self.hp = 100
-
