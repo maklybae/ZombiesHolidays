@@ -1,24 +1,31 @@
 import pygame
-from main import all_sprites
 from hero_constants import *
-
+from constants import *
+from groups import *
 
 class Hero(pygame.sprite.Sprite):
     image = pygame.Surface((20, 20))
-    image.fill(pygame.Color('red'))
 
     def __init__(self, *groups):
-        super().__init__(*groups)
+        super().__init__(hero_group, all_sprites, *groups)
         self.image = Hero.image
+        self.image.fill(pygame.Color('green'))
         self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
+
+    def left(self):
+        self.rect.move(-3)
+
+    def right(self):
+        self.rect.move(3)
 
 
 class Bullet(pygame.sprite.Sprite):
     image = pygame.Surface((5, 5))
     image.fill(pygame.Color('green'))
 
-    def __init__(self, *groups, coords):
-        super().__init__(*groups)
+    def __init__(self, coords, *groups):
+        super().__init__(all_sprites, bullets_group, *groups)
         self.image = Bullet.image
         self.rect = self.image.get_rect()
         self.x, self.y = coords

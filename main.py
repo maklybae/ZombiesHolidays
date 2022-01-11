@@ -1,5 +1,7 @@
 import pygame
 from constants import *
+import hero
+from groups import *
 
 pygame.init()
 screen = pygame.display.set_mode(SIZE)
@@ -7,8 +9,9 @@ screen = pygame.display.set_mode(SIZE)
 
 pygame.display.set_caption('ZombiesHolidays')
 running = True
-all_sprites = pygame.sprite.Group()
+
 clock = pygame.time.Clock()
+hero = hero.Hero()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
