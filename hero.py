@@ -36,6 +36,10 @@ class Bullet(pygame.sprite.Sprite):
         self.ticks = 0
 
     def update(self, *args, **kwargs) -> None:
+        for zombie in zombies_group.sprites():
+            if pygame.sprite.collide_mask(self, zombie):
+                self.kill()
+                return
         if self.ticks >= BULLET_SPEED:
             self.ticks = 0
             self.rect = self.rect.move(0, -1)

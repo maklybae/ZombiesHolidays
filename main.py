@@ -13,6 +13,8 @@ pygame.display.set_caption('ZombiesHolidays')
 running = True
 clock = pygame.time.Clock()
 hero = hero.Hero()
+zomb1 = zombies.Zombie()
+zomb2 = zombies.ZombieFather()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
