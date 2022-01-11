@@ -16,6 +16,13 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                hero.left()
+            if event.key == pygame.K_RIGHT:
+                hero.right()
+            if event.key == pygame.K_SPACE:
+                hero.shoot()
 
     all_sprites.update()
 
