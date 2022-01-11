@@ -1,18 +1,18 @@
 import pygame
 from constants import *
+from tools import *
 
 pygame.init()
 screen = pygame.display.set_mode(SIZE)
 
 
 pygame.display.set_caption('ZombiesHolidays')
-running = True
 all_sprites = pygame.sprite.Group()
 clock = pygame.time.Clock()
-while running:
+while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            terminate()
 
     all_sprites.update()
 
