@@ -4,8 +4,13 @@ from constants import *
 from constants import *
 
 
+if __name__ == '__main__':
+    pygame.init()
+    screen = pygame.display.set_mode(SIZE)
+
+
 class Cursor(pygame.sprite.Sprite):
-    image = load_image('data\\cursor.png')
+    image = load_image('cursor.png')
 
     def __init__(self, *groups):
         super().__init__(*groups)
@@ -35,3 +40,6 @@ def show_menu(screen: pygame.Surface):
         cursor_group.draw(screen)
         pygame.display.flip()
 
+
+if __name__ == '__main__':
+    show_menu(screen)
