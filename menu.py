@@ -7,6 +7,13 @@ if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
 
+cur_slide = 0
+
+
+def change_slide():
+    global cur_slide
+    cur_slide = (cur_slide + 1) % 2
+
 
 class Cursor(pygame.sprite.Sprite):
     image = load_image('cursor3.png')
@@ -21,8 +28,9 @@ class Cursor(pygame.sprite.Sprite):
 
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, title: str, pos: tuple, size: tuple, slide:int, *groups):
+    def __init__(self, title: str, pos: tuple, size: tuple, slide: int, func, *groups):
         super().__init__(menu_buttons_group[slide], *groups)
+        self.func = func
         self.image = pygame.Surface(size)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = pos
@@ -35,17 +43,16 @@ class Button(pygame.sprite.Sprite):
     def update(self, pos, *args, **kwargs) -> None:
         x, y = pos
         if self.rect.left <= x <= self.rect.right and self.rect.top <= y <= self.rect.bottom:
-            pass  # action
+            self.func()
 
 
 def show_menu(screen: pygame.Surface):
     slides = [pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT))]
     slides[0].fill(pygame.Color('blue'))
     slides[1].fill(pygame.Color('yellow'))
-    cur_slide = 0
     pygame.mouse.set_visible(False)
     Cursor()
-    Button('Test', (20, 20), (300, 50), 0)
+    Button('Test', (20, 20), (300, 50), 0, change_slide)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
