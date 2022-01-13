@@ -8,7 +8,7 @@ from tools import load_image
 
 
 class Zombie(pygame.sprite.Sprite):  # класс стандартного зомби
-    image = load_image('zombie.png')
+    image = pygame.transform.scale(load_image('zombie.png'), (40, 45))
 
     def __init__(self, *groups):
         super().__init__(all_sprites, zombies_group, *groups)
@@ -47,6 +47,7 @@ class ZombieFather(Zombie):
     def __init__(self, *groups):
         super().__init__(*groups)
         self.image = ZombieFather.image
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = randint(0, WIDTH - self.rect.width)
         self.rect.y = 0
