@@ -4,15 +4,16 @@ from random import randint
 from constants import WIDTH
 from groups import *
 from constants import *
+from tools import load_image
 
 
 class Zombie(pygame.sprite.Sprite):  # класс стандартного зомби
-    image = pygame.Surface((20, 20))  # zombie image
+    image = load_image('zombie.png')
 
     def __init__(self, *groups):
         super().__init__(all_sprites, zombies_group, *groups)
         self.image = Zombie.image
-        self.image.fill(pygame.Color("red"))  # temp
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = randint(0, WIDTH - self.rect.width)
         self.rect.y = 0
