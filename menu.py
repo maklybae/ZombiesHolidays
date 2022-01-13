@@ -21,8 +21,8 @@ class Cursor(pygame.sprite.Sprite):
 
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, title: str, pos: tuple, size: tuple, *groups):
-        super().__init__(menu_buttons_group, *groups)
+    def __init__(self, title: str, pos: tuple, size: tuple, slide:int, *groups):
+        super().__init__(menu_buttons_group[slide], *groups)
         self.image = pygame.Surface(size)
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = pos
@@ -39,14 +39,13 @@ class Button(pygame.sprite.Sprite):
 
 
 def show_menu(screen: pygame.Surface):
-    # fon = pygame.transform.scale(load_image('fon.jpg'), (WIDTH, HEIGHT))
-    fon = pygame.Surface((WIDTH, HEIGHT))
-    fon.fill(pygame.Color('blue'))
+    slides = [pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT))]
+    slides[0].fill(pygame.Color('blue'))
+    slides[1].fill(pygame.Color('yellow'))
+    cur_slide = 0
     pygame.mouse.set_visible(False)
-    screen.blit(fon, (0, 0))
     Cursor()
-    Button('Test', (20, 20), (300, 50))
-    menu_buttons_group.draw(screen)
+    Button('Test', (20, 20), (300, 50), 0)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -55,11 +54,11 @@ def show_menu(screen: pygame.Surface):
                 if pygame.mouse.get_focused():
                     cursor_group.update(event.pos)
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                menu_buttons_group.update(event.pos)
+                menu_buttons_group[cur_slide].update(event.pos)
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 return
-        screen.blit(fon, (0, 0))
-        menu_buttons_group.draw(screen)
+        screen.blit(slides[cur_slide], (0, 0))
+        menu_buttons_group[cur_slide].draw(screen)
         cursor_group.draw(screen)
         pygame.display.flip()
 
