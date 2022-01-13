@@ -1,7 +1,7 @@
 import pygame
 from tools import *
 from constants import *
-from groups import menu_buttons_group
+from groups import menu_buttons_group, cursor_group
 
 if __name__ == '__main__':
     pygame.init()
@@ -12,7 +12,7 @@ class Cursor(pygame.sprite.Sprite):
     image = load_image('cursor3.png')
 
     def __init__(self, *groups):
-        super().__init__(*groups)
+        super().__init__(cursor_group, *groups)
         self.image = Cursor.image
         self.rect = self.image.get_rect()
 
@@ -44,8 +44,7 @@ def show_menu(screen: pygame.Surface):
     fon.fill(pygame.Color('blue'))
     pygame.mouse.set_visible(False)
     screen.blit(fon, (0, 0))
-    cursor_group = pygame.sprite.Group(Cursor())
-    cursor_coords = (0, 0)
+    Cursor()
     Button('Test', (20, 20), (300, 50))
     menu_buttons_group.draw(screen)
     while True:
@@ -54,14 +53,13 @@ def show_menu(screen: pygame.Surface):
                 terminate()
             if event.type == pygame.MOUSEMOTION:
                 if pygame.mouse.get_focused():
-                    cursor_coords = event.pos
+                    cursor_group.update(event.pos)
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 menu_buttons_group.update(event.pos)
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 return
         screen.blit(fon, (0, 0))
         menu_buttons_group.draw(screen)
-        cursor_group.update(cursor_coords)
         cursor_group.draw(screen)
         pygame.display.flip()
 
