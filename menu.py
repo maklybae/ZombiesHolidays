@@ -36,6 +36,8 @@ def show_menu(screen: pygame.Surface):
             if event.type == pygame.MOUSEMOTION:
                 if pygame.mouse.get_focused():
                     cursor_coords = event.pos
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                return
         screen.blit(fon, (0, 0))
         cursor_group.update(cursor_coords)
         cursor_group.draw(screen)

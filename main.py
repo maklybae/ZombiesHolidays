@@ -10,9 +10,13 @@ from groups import *
 import hero
 import zombies
 from tools import *
+from menu import show_menu
 
 
 pygame.display.set_caption('ZombiesHolidays')
+
+show_menu(screen)
+
 clock = pygame.time.Clock()
 hero = hero.Hero()
 zomb1 = zombies.Zombie()
