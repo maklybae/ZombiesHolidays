@@ -1,26 +1,21 @@
 import pygame
 from constants import *
-import hero
-from groups import *
-import zombies
-from groups import *
 
 pygame.init()
 screen = pygame.display.set_mode(SIZE)
 
 
 pygame.display.set_caption('ZombiesHolidays')
-running = True
 clock = pygame.time.Clock()
 hero = hero.Hero()
 zomb1 = zombies.Zombie()
 zomb2 = zombies.ZombieFather()
 key_left = False
 key_right = False
-while running:
+while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            terminate()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 key_left = True
