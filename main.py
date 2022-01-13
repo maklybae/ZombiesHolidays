@@ -34,6 +34,8 @@ while True:
                 key_right = True
             if event.key == pygame.K_SPACE:
                 hero.shoot()
+            if event.key == pygame.K_ESCAPE:
+                show_menu(screen)
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 key_left = False
