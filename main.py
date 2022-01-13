@@ -1,5 +1,10 @@
 import pygame
 from constants import *
+from groups import *
+import hero
+import zombies
+from tools import *
+
 
 pygame.init()
 screen = pygame.display.set_mode(SIZE)
