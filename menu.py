@@ -48,8 +48,8 @@ class Button(pygame.sprite.Sprite):
 
 def show_menu(screen: pygame.Surface):
     slides = [pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT))]
-    slides[0].fill(pygame.Color('blue'))
-    slides[1].fill(pygame.Color('yellow'))
+    slides[0] = pygame.transform.scale(load_image('slide1.png'), SIZE)
+    slides[1] = pygame.transform.scale(load_image('slide2.png'), SIZE)
     pygame.mouse.set_visible(False)
     Cursor()
     Button('Test', (20, 20), (300, 50), 0, change_slide)
