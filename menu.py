@@ -33,9 +33,11 @@ class Button(pygame.sprite.Sprite):
         self.func = func
         self.image = pygame.Surface(size)
         self.rect = self.image.get_rect()
+        pygame.draw.rect(self.image, BUTTONS_BORDER_COLOR, self.rect)
+        pygame.draw.rect(self.image, MENU_COLOR, (self.rect.x + 2, self.rect.y + 2, self.rect.width - 4, self.rect.height - 4))
         self.rect.x, self.rect.y = pos
         font = pygame.font.Font(None, size[1] // 2)
-        text = font.render(title, True, (100, 255, 100))
+        text = font.render(title, True, BUTTONS_BORDER_COLOR)
         text_x = size[0] // 2 - text.get_width() // 2
         text_y = size[1] // 2 - text.get_height() // 2
         self.image.blit(text, (text_x, text_y))
@@ -52,7 +54,9 @@ def show_menu(screen: pygame.Surface):
     slides[1] = pygame.transform.scale(load_image('slide2.png'), SIZE)
     pygame.mouse.set_visible(False)
     Cursor()
-    Button('Test', (20, 20), (300, 50), 0, change_slide)
+    Button('Все уровни', (20, 20), (300, 50), 0, change_slide)
+
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
