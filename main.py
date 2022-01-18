@@ -17,9 +17,8 @@ pygame.display.set_caption('ZombiesHolidays')
 
 
 if (lvl := show_menu(screen)) is None:
-    pass  # запуск последнего уровня
-else:
-    spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
+    lvl = 1
+spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
 
 clock = pygame.time.Clock()
 hero = hero.Hero()
@@ -38,7 +37,13 @@ while True:
             if event.key == pygame.K_SPACE:
                 hero.shoot()
             if event.key == pygame.K_ESCAPE:
-                show_menu(screen)
+                if (lvl := show_menu(screen)) is None:
+                    continue
+                else:
+                    spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
+                    remove_all_sprites()
+                    hero.first_position()
+                    ticks = 0
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 key_left = False

@@ -27,6 +27,9 @@ class Hero(pygame.sprite.Sprite):
     def shoot(self):
         Bullet((self.rect.x, self.rect.y - 10))
 
+    def first_position(self):
+        self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
+
 
 class Bullet(pygame.sprite.Sprite):
     image = pygame.Surface((5, 5))

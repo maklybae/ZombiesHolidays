@@ -63,6 +63,8 @@ class Button(pygame.sprite.Sprite):
 
 
 def show_menu(screen: pygame.Surface):
+    global change_level_to
+    change_level_to = -1
     slides = [pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT))]
     slides[0] = pygame.transform.scale(load_image('slide1.png'), SIZE)
     slides[1] = pygame.transform.scale(load_image('slide2.png'), SIZE)
