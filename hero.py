@@ -8,7 +8,7 @@ class Hero(pygame.sprite.Sprite):
     image = pygame.Surface((20, 20))
 
     def __init__(self, *groups):
-        super().__init__(hero_group, all_sprites, *groups)
+        super().__init__(hero_group, *groups)
         self.image = Hero.image
         self.image.fill(pygame.Color('green'))
         self.rect = self.image.get_rect()
@@ -35,7 +35,7 @@ class Bullet(pygame.sprite.Sprite):
     image = pygame.Surface((5, 5))
 
     def __init__(self, coords, *groups):
-        super().__init__(all_sprites, bullets_group, *groups)
+        super().__init__(bullets_group, *groups)
         self.image = Bullet.image
         self.image.fill(pygame.Color('blue'))
         self.rect = self.image.get_rect()

@@ -11,7 +11,7 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
     image = pygame.transform.scale(load_image('zombie.png'), (40, 45))
 
     def __init__(self, coord_x):
-        super().__init__(all_sprites, zombies_group)
+        super().__init__(zombies_group)
         self.image = Zombie.image
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()

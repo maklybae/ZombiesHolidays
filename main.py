@@ -58,10 +58,14 @@ while True:
     if key_right:
         hero.right()
 
-    all_sprites.update()
+    bullets_group.update()
+    hero_group.update()
+    zombies_group.update()
 
     screen.fill((0, 0, 0))
-    all_sprites.draw(screen)
+    bullets_group.draw(screen)
+    hero_group.draw(screen)
+    zombies_group.draw(screen)
 
     pygame.display.flip()
 
