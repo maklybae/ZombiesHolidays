@@ -8,11 +8,17 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode(SIZE)
 
 cur_slide = 0
+change_level_to = -1
 
 
 def change_slide():
     global cur_slide
     cur_slide = (cur_slide + 1) % 2
+
+
+def change_level(lvl):
+    global change_level_to
+    change_level_to = lvl
 
 
 class Cursor(pygame.sprite.Sprite):
@@ -28,9 +34,10 @@ class Cursor(pygame.sprite.Sprite):
 
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, title: str, pos: tuple, size: tuple, slide: int, func, *groups):
-        super().__init__(menu_buttons_group[slide], *groups)
+    def __init__(self, title: str, pos: tuple, size: tuple, slide: int, func, lvl=None):
+        super().__init__(menu_buttons_group[slide])
         self.func = func
+        self.lvl = lvl
         self.image = pygame.Surface(size)
         self.rect = self.image.get_rect()
         if slide == 0:
@@ -49,7 +56,10 @@ class Button(pygame.sprite.Sprite):
     def update(self, pos, *args, **kwargs) -> None:
         x, y = pos
         if self.rect.left <= x <= self.rect.right and self.rect.top <= y <= self.rect.bottom:
-            self.func()
+            if self.lvl is not None:
+                self.func(self.lvl)
+            else:
+                self.func()
 
 
 def show_menu(screen: pygame.Surface):
@@ -61,12 +71,12 @@ def show_menu(screen: pygame.Surface):
     Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, change_slide)
     Button('Все уровни', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 220 + SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide)
     Button('Об игре', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 240 + 2 * SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide)
-    Button('1', (240, 232), SLIDE2_BUTTON_SIZE, 1, change_slide)
-    Button('4', (241, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_slide)
-    Button('2', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232), SLIDE2_BUTTON_SIZE, 1, change_slide)
-    Button('5', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_slide)
-    Button('3', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_slide)
-    Button('6', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232 + SLIDE2_BUTTON_SIZE[0] + 49), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_slide)
+    Button('1', (240, 232), SLIDE2_BUTTON_SIZE, 1, change_level, 1)
+    Button('4', (241, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_level, 4)
+    Button('2', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232), SLIDE2_BUTTON_SIZE, 1, change_level, 2)
+    Button('5', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_level, 5)
+    Button('3', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 3)
+    Button('6', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232 + SLIDE2_BUTTON_SIZE[0] + 49), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 6)
 
     while True:
         for event in pygame.event.get():
@@ -78,7 +88,9 @@ def show_menu(screen: pygame.Surface):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 menu_buttons_group[cur_slide].update(event.pos)
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                return
+                return None
+        if change_level_to != -1:
+            return change_level_to
         screen.blit(slides[cur_slide], (0, 0))
         menu_buttons_group[cur_slide].draw(screen)
         cursor_group.draw(screen)

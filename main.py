@@ -19,8 +19,6 @@ show_menu(screen)
 
 clock = pygame.time.Clock()
 hero = hero.Hero()
-zomb1 = zombies.Zombie()
-zomb2 = zombies.ZombieFather()
 key_left = False
 key_right = False
 while True:
