@@ -23,3 +23,11 @@ def load_image(name, colorkey=None):
 def terminate():
     pygame.quit()
     sys.exit()
+
+
+def load_level(lvl_num):
+    with open(f'data/levels/lvl{lvl_num}') as lvl:
+        spawn_time = list(map(int, lvl.readline().split(';')))
+        spawn_zombie = list(map(int, lvl.readline().split(';')))
+        spawn_coords = list(map(int, lvl.readline().split(';')))
+    return spawn_time, spawn_zombie, spawn_coords
