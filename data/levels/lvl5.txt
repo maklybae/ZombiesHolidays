@@ -1,0 +1,3 @@
+100;200;300;400
+Zombie;Zombie;ZombieFather;ZombieFather
+30;150;600;800
