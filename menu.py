@@ -33,9 +33,12 @@ class Button(pygame.sprite.Sprite):
         self.func = func
         self.image = pygame.Surface(size)
         self.rect = self.image.get_rect()
-        pygame.draw.rect(self.image, BUTTONS_BORDER_COLOR, self.rect)
-        pygame.draw.rect(self.image, MENU_COLOR, (
-            self.rect.x + 2, self.rect.y + 2, self.rect.width - 4, self.rect.height - 4))
+        if slide == 0:
+            pygame.draw.rect(self.image, BUTTONS_BORDER_COLOR, self.rect)
+            pygame.draw.rect(self.image, MENU_COLOR, (
+                self.rect.x + 2, self.rect.y + 2, self.rect.width - 4, self.rect.height - 4))
+        elif slide == 1:
+            self.image.fill(MENU_COLOR)
         self.rect.x, self.rect.y = pos
         font = pygame.font.Font(None, size[1] // 2)
         text = font.render(title, True, BUTTONS_BORDER_COLOR)
@@ -58,6 +61,12 @@ def show_menu(screen: pygame.Surface):
     Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, change_slide)
     Button('Все уровни', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 220 + SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide)
     Button('Об игре', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 240 + 2 * SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide)
+    Button('1', (240, 232), SLIDE2_BUTTON_SIZE, 1, change_slide)
+    Button('4', (241, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_slide)
+    Button('2', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232), SLIDE2_BUTTON_SIZE, 1, change_slide)
+    Button('5', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_slide)
+    Button('3', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_slide)
+    Button('6', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232 + SLIDE2_BUTTON_SIZE[0] + 49), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_slide)
 
     while True:
         for event in pygame.event.get():
