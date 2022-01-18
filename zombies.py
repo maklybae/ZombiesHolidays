@@ -10,12 +10,12 @@ from tools import load_image
 class Zombie(pygame.sprite.Sprite):  # класс стандартного зомби
     image = pygame.transform.scale(load_image('zombie.png'), (40, 45))
 
-    def __init__(self, *groups):
-        super().__init__(all_sprites, zombies_group, *groups)
+    def __init__(self, coord_x):
+        super().__init__(all_sprites, zombies_group)
         self.image = Zombie.image
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = randint(0, WIDTH - self.rect.width)
+        self.rect.x = coord_x
         self.rect.y = 0
         self.ticks = 0
         self.dx = 0
@@ -44,11 +44,11 @@ class ZombieFather(Zombie):
     image = pygame.Surface((50, 50))  # zombie image
     image.fill(pygame.Color("red"))
 
-    def __init__(self, *groups):
-        super().__init__(*groups)
+    def __init__(self, coord_x):
+        super().__init__(coord_x)
         self.image = ZombieFather.image
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = randint(0, WIDTH - self.rect.width)
+        self.rect.x = coord_x
         self.rect.y = 0
         self.hp = 100

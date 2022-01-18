@@ -15,12 +15,17 @@ from menu import show_menu
 
 pygame.display.set_caption('ZombiesHolidays')
 
-show_menu(screen)
+
+if (lvl := show_menu(screen)) is None:
+    pass  # запуск последнего уровня
+else:
+    spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
 
 clock = pygame.time.Clock()
 hero = hero.Hero()
 key_left = False
 key_right = False
+ticks = 0
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -39,6 +44,10 @@ while True:
                 key_left = False
             if event.key == pygame.K_RIGHT:
                 key_right = False
+    ticks += DELTA_TICKS
+    if spawn_time and ticks >= spawn_time[0]:
+        eval(f'zombies.{spawn_zombie.pop(0)}({spawn_coords.pop(0)})')
+        spawn_time.pop(0)
     if key_left:
         hero.left()
     if key_right:
