@@ -21,6 +21,11 @@ def change_level(lvl):
     change_level_to = lvl
 
 
+def lastlvl():
+    global change_level_to
+    change_level_to = None
+
+
 class Cursor(pygame.sprite.Sprite):
     image = load_image('cursor3.png')
 
@@ -70,7 +75,7 @@ def show_menu(screen: pygame.Surface):
     slides[1] = pygame.transform.scale(load_image('slide2.png'), SIZE)
     pygame.mouse.set_visible(False)
     Cursor()
-    Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, change_slide)
+    Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, lastlvl)
     Button('Все уровни', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 220 + SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide)
     Button('Об игре', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 240 + 2 * SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide)
     Button('1', (240, 232), SLIDE2_BUTTON_SIZE, 1, change_level, 1)
