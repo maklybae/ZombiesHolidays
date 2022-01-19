@@ -31,3 +31,13 @@ def load_level(lvl_num):
         spawn_zombie = lvl.readline().rstrip().split(';')
         spawn_coords = list(map(int, lvl.readline().split(';')))
     return spawn_time, spawn_zombie, spawn_coords
+
+
+def load_lastlvl():
+    with open(f'data/lastlvl') as lvl:
+        return lvl.readline().rstrip()
+
+
+def save_lastlvl(lvl):
+    with open('data/lastlvl', 'w') as f:
+        f.write(lvl)
