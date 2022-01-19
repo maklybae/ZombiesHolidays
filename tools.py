@@ -35,9 +35,9 @@ def load_level(lvl_num):
 
 def load_lastlvl():
     with open(f'data/lastlvl') as lvl:
-        return lvl.readline().rstrip()
+        return int(lvl.readline().rstrip())
 
 
 def save_lastlvl(lvl):
     with open('data/lastlvl', 'w') as f:
-        f.write(lvl)
+        f.write(str(lvl))
