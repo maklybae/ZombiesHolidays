@@ -79,6 +79,7 @@ def show_menu(screen: pygame.Surface):
     Button('5', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_level, 5)
     Button('3', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 3)
     Button('6', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232 + SLIDE2_BUTTON_SIZE[0] + 49), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 6)
+    Button('Назад', (WIDTH - SLIDE1_BUTTON_SIZE[0], HEIGHT - SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 1, change_slide)
 
     while True:
         for event in pygame.event.get():
