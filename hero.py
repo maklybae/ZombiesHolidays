@@ -50,6 +50,6 @@ class Bullet(pygame.sprite.Sprite):
                 return
         if self.ticks >= BULLET_SPEED:
             self.ticks = 0
-            self.rect = self.rect.move(0, -1)
+            self.rect = self.rect.move(0, -3)
         else:
             self.ticks += 1
