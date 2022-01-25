@@ -1,7 +1,7 @@
 import pygame
 from tools import *
 from constants import *
-from groups import menu_buttons_group, cursor_group
+from groups import menu_buttons_group, cursor_group, remove_all_buttons
 
 if __name__ == '__main__':
     pygame.init()
@@ -61,6 +61,7 @@ class Button(pygame.sprite.Sprite):
     def update(self, pos, *args, **kwargs) -> None:
         x, y = pos
         if self.rect.left <= x <= self.rect.right and self.rect.top <= y <= self.rect.bottom:
+            print('YES')
             if self.lvl is not None:
                 self.func(self.lvl)
             else:
@@ -85,6 +86,7 @@ def show_menu(screen: pygame.Surface):
     Button('3', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 3)
     Button('6', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232 + SLIDE2_BUTTON_SIZE[0] + 49), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 6)
     Button('Назад', (WIDTH - SLIDE1_BUTTON_SIZE[0], HEIGHT - SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 1, change_slide)
+    print(cur_slide)
 
     while True:
         for event in pygame.event.get():
@@ -96,8 +98,10 @@ def show_menu(screen: pygame.Surface):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 menu_buttons_group[cur_slide].update(event.pos)
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                remove_all_buttons()
                 return None
         if change_level_to != -1:
+            remove_all_buttons()
             return change_level_to
         screen.blit(slides[cur_slide], (0, 0))
         menu_buttons_group[cur_slide].draw(screen)
