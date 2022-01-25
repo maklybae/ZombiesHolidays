@@ -25,6 +25,8 @@ hero = hero.Hero()
 key_left = False
 key_right = False
 ticks = 0
+background = pygame.transform.scale(load_image('background.png'), SIZE)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -66,7 +68,7 @@ while True:
     hero_group.update()
     zombies_group.update()
 
-    screen.fill((0, 0, 0))
+    screen.blit(background, (0, 0))
     bullets_group.draw(screen)
     hero_group.draw(screen)
     zombies_group.draw(screen)
