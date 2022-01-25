@@ -26,10 +26,6 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
         if self.hp <= 0:
             self.kill()
             return
-        if self.rect.bottom >= HEIGHT:
-            # game over !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            self.kill()
-            return
         if self.ticks >= ZOMBIE_SPEED:
             self.ticks = 0
             self.rect = self.rect.move(self.dx, self.dy)
@@ -38,6 +34,10 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
 
     def take_damage(self, damage):
         self.hp -= damage
+
+    def check_gameover(self):
+        if self.rect.bottom >= HEIGHT - 100:
+            return True
 
 
 class ZombieFather(Zombie):

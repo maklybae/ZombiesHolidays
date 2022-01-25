@@ -55,6 +55,18 @@ while True:
                 key_left = False
             if event.key == pygame.K_RIGHT:
                 key_right = False
+
+    for zombie in zombies_group.sprites():
+        if zombie.check_gameover():
+            save_lastlvl(lvl)
+            tmp = show_menu(screen)
+            if tmp is not None:
+                lvl = tmp
+            spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
+            remove_all_sprites()
+            hero.first_position()
+            ticks = 0
+
     ticks += DELTA_TICKS
     if spawn_time and ticks >= spawn_time[0]:
         eval(f'zombies.{spawn_zombie.pop(0)}({spawn_coords.pop(0)})')
