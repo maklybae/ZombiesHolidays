@@ -2,10 +2,11 @@ import pygame
 from hero_constants import *
 from constants import *
 from groups import *
+from tools import *
 
 
 class Hero(pygame.sprite.Sprite):
-    image = pygame.Surface((20, 20))
+    image = pygame.Surface(HERO_SIZE)
 
     def __init__(self, *groups):
         super().__init__(hero_group, *groups)
@@ -32,12 +33,11 @@ class Hero(pygame.sprite.Sprite):
 
 
 class Bullet(pygame.sprite.Sprite):
-    image = pygame.Surface((5, 5))
+    image = load_image('bullet.png')
 
     def __init__(self, coords, *groups):
         super().__init__(bullets_group, *groups)
         self.image = Bullet.image
-        self.image.fill(pygame.Color('blue'))
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = coords
         self.ticks = 0
