@@ -51,3 +51,16 @@ class ZombieFather(Zombie):
         self.rect.bottomleft = coord_x, 0
         self.hp = ZOMBIE_FATHER_HP
         self.speed = ZOMBIE_FATHER_SPEED
+
+
+class ZombieVarvara(Zombie):
+    image = load_image('zombievarvara.png')
+
+    def __init__(self, coord_x):
+        super().__init__(coord_x)
+        self.image = ZombieVarvara.image
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.bottomleft = coord_x, 0
+        self.hp = ZOMBIE_VARVARA_HP
+        self.speed = ZOMBIE_VARVARA_SPEED
