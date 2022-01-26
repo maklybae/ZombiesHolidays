@@ -7,6 +7,10 @@ from tools import *
 
 class Hero(pygame.sprite.Sprite):
     image = load_image('hero.png')
+    font = pygame.font.Font(None, image.get_height() // 4)
+    text = font.render('RELOAD', True, (255, 0, 0))
+    text_x = image.get_width() // 2 - text.get_width() // 2 + 10
+    text_y = 0
 
     def __init__(self, *groups):
         super().__init__(hero_group, *groups)
@@ -35,12 +39,13 @@ class Hero(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
 
     def update(self):
+        self.image.blit(Hero.image, (0, 0), (0, 0, self.rect.width, 13), special_flags=pygame.BLEND_RGBA_SUB)
         if self.bullets >= MAG:
+            self.image.blit(Hero.text, (Hero.text_x, Hero.text_y))
             self.ticks_reload += 1
             if self.ticks_reload >= RELOAD_TIME:
                 self.reset_bullets()
                 self.ticks_reload = 0
-        print(self.bullets, self.ticks_reload)
 
     def reset_bullets(self):
         self.bullets = 0
