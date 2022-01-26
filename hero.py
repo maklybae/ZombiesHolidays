@@ -45,6 +45,9 @@ class Hero(pygame.sprite.Sprite):
     def reset_bullets(self):
         self.bullets = 0
 
+    def reload(self):
+        self.bullets = 10
+
 
 class Bullet(pygame.sprite.Sprite):
     image = load_image('bullet.png')

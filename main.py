@@ -39,6 +39,8 @@ while True:
                 key_right = True
             if event.key == pygame.K_SPACE:
                 hero.shoot()
+            if event.key == pygame.K_r:
+                hero.reload()
             if event.key == pygame.K_ESCAPE:
                 save_lastlvl(lvl)
                 tmp = show_menu(screen)
