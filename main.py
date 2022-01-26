@@ -43,6 +43,7 @@ while True:
                 hero.reload()
             if event.key == pygame.K_ESCAPE:
                 save_lastlvl(lvl)
+                key_left, key_right = False, False
                 tmp = show_menu(screen)
                 if tmp is None:
                     continue
@@ -62,6 +63,7 @@ while True:
     for zombie in zombies_group.sprites():
         if zombie.check_gameover():
             save_lastlvl(lvl)
+            key_left, key_right = False, False
             tmp = show_menu(screen)
             if tmp is not None:
                 lvl = tmp
