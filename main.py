@@ -49,6 +49,7 @@ while True:
                     spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
                     remove_all_sprites()
                     hero.first_position()
+                    hero.reset_bullets()
                     ticks = 0
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
@@ -65,6 +66,7 @@ while True:
             spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
             remove_all_sprites()
             hero.first_position()
+            hero.reset_bullets()
             ticks = 0
 
     ticks += DELTA_TICKS

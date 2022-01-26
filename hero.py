@@ -38,9 +38,12 @@ class Hero(pygame.sprite.Sprite):
         if self.bullets >= MAG:
             self.ticks_reload += 1
             if self.ticks_reload >= RELOAD_TIME:
-                self.bullets = 0
+                self.reset_bullets()
                 self.ticks_reload = 0
         print(self.bullets, self.ticks_reload)
+
+    def reset_bullets(self):
+        self.bullets = 0
 
 
 class Bullet(pygame.sprite.Sprite):

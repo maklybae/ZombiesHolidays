@@ -35,7 +35,7 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
         self.hp -= damage
 
     def check_gameover(self):
-        if self.rect.top >= HEIGHT - 145:
+        if self.rect.top >= HEIGHT - 147:
             return True
 
 
