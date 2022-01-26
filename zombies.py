@@ -8,7 +8,7 @@ from tools import load_image
 
 
 class Zombie(pygame.sprite.Sprite):  # класс стандартного зомби
-    image = pygame.transform.scale(load_image('zombie.png'), (40, 45))
+    image = load_image("Zombie.png")
 
     def __init__(self, coord_x):
         super().__init__(zombies_group)
