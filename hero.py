@@ -13,6 +13,8 @@ class Hero(pygame.sprite.Sprite):
         self.image = Hero.image
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
+        self.bullets = 0
+        self.ticks_reload = 0
 
     def left(self):
         if self.rect.x < 0:
@@ -25,10 +27,20 @@ class Hero(pygame.sprite.Sprite):
         self.rect = self.rect.move(MOVING_SPEED, 0)
 
     def shoot(self):
-        Bullet((self.rect.x, self.rect.y - 10))
+        if self.bullets < MAG:
+            Bullet((self.rect.x, self.rect.y - 10))
+            self.bullets += 1
 
     def first_position(self):
         self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
+
+    def update(self):
+        if self.bullets >= MAG:
+            self.ticks_reload += 1
+            if self.ticks_reload >= RELOAD_TIME:
+                self.bullets = 0
+                self.ticks_reload = 0
+        print(self.bullets, self.ticks_reload)
 
 
 class Bullet(pygame.sprite.Sprite):

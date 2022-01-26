@@ -76,6 +76,7 @@ while True:
     if key_right:
         hero.right()
 
+    hero_group.update()
     bullets_group.update()
     hero_group.update()
     zombies_group.update()
