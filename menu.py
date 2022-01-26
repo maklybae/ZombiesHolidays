@@ -71,9 +71,9 @@ def show_menu(screen: pygame.Surface):
     global change_level_to
     change_level_to = -1
     slides = [pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT))]
-    slides[0] = pygame.transform.scale(load_image('slide1.png'), SIZE)
-    slides[1] = pygame.transform.scale(load_image('slide2.png'), SIZE)
-    slides[2] = pygame.transform.scale(load_image('slide1.png'), SIZE)
+    slides[0] = pygame.transform.scale(load_image('slide.png'), SIZE)
+    slides[1] = pygame.transform.scale(load_image('slide.png'), SIZE)
+    slides[2] = pygame.transform.scale(load_image('slide.png'), SIZE)
     pygame.mouse.set_visible(False)
     Cursor()
     Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, lastlvl)
