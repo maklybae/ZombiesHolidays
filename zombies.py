@@ -15,8 +15,7 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
         self.image = Zombie.image
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = coord_x
-        self.rect.y = 0
+        self.rect.bottomleft = coord_x, 0
         self.ticks = 0
         self.dx = 0
         self.dy = 1
@@ -36,19 +35,17 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
         self.hp -= damage
 
     def check_gameover(self):
-        if self.rect.bottom >= HEIGHT - 100:
+        if self.rect.top >= HEIGHT - 145:
             return True
 
 
 class ZombieFather(Zombie):
-    image = pygame.Surface((50, 50))  # zombie image
-    image.fill(pygame.Color("red"))
+    image = load_image('zombiefather2.png')
 
     def __init__(self, coord_x):
         super().__init__(coord_x)
         self.image = ZombieFather.image
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = coord_x
-        self.rect.y = 0
+        self.rect.bottomleft = coord_x, 0
         self.hp = 100
