@@ -19,13 +19,14 @@ class Zombie(pygame.sprite.Sprite):  # класс стандартного зо�
         self.ticks = 0
         self.dx = 0
         self.dy = 1
-        self.hp = 10
+        self.hp = ZOMBIE_HP
+        self.speed = ZOMBIE_SPEED
 
     def update(self, *args, **kwargs) -> None:
         if self.hp <= 0:
             self.kill()
             return
-        if self.ticks >= ZOMBIE_SPEED:
+        if self.ticks >= self.speed:
             self.ticks = 0
             self.rect = self.rect.move(self.dx, self.dy)
         else:
@@ -48,4 +49,5 @@ class ZombieFather(Zombie):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.bottomleft = coord_x, 0
-        self.hp = 100
+        self.hp = ZOMBIE_FATHER_HP
+        self.speed = ZOMBIE_FATHER_SPEED
