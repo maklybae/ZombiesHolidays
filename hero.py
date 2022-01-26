@@ -6,12 +6,11 @@ from tools import *
 
 
 class Hero(pygame.sprite.Sprite):
-    image = pygame.Surface(HERO_SIZE)
+    image = load_image('hero.png')
 
     def __init__(self, *groups):
         super().__init__(hero_group, *groups)
         self.image = Hero.image
-        self.image.fill(pygame.Color('green'))
         self.rect = self.image.get_rect()
         self.rect.x, self.rect.y = WIDTH // 2, HEIGHT - self.rect.height
 
