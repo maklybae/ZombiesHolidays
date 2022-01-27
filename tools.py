@@ -28,11 +28,8 @@ def terminate():
 def load_level(lvl_num):
     with open(f'data/levels/lvl{lvl_num}.txt') as lvl:
         spawn_time = list(map(int, lvl.readline().rstrip().split(';')))
-        print(len(spawn_time))
         spawn_zombie = lvl.readline().rstrip().split(';')
-        print(len(spawn_zombie))
         spawn_coords = list(map(int, lvl.readline().rstrip().split(';')))
-        print(len(spawn_coords))
     return spawn_time, spawn_zombie, spawn_coords
 
 
