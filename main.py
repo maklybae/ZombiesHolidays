@@ -12,6 +12,7 @@ import zombies
 from tools import *
 from menu import show_menu
 from win import win
+from gameover import gameover
 
 
 pygame.display.set_caption('ZombiesHolidays')
@@ -63,6 +64,7 @@ while True:
     for zombie in zombies_group.sprites():
         if zombie.check_gameover():
             key_left, key_right = False, False
+            gameover(screen)
             tmp = show_menu(screen)
             if tmp is not None:
                 lvl = tmp
@@ -77,9 +79,9 @@ while True:
         eval(f'zombies.{spawn_zombie.pop(0)}({spawn_coords.pop(0)})')
         spawn_time.pop(0)
     if not spawn_time and not zombies_group.sprites():
+        key_left, key_right = False, False
         win(screen)
         save_lastlvl(lvl + 1)
-        key_left, key_right = False, False
         tmp = show_menu(screen)
         if tmp is not None:
             lvl = tmp
