@@ -43,7 +43,6 @@ while True:
             if event.key == pygame.K_r:
                 hero.reload()
             if event.key == pygame.K_ESCAPE:
-                save_lastlvl(lvl)
                 key_left, key_right = False, False
                 tmp = show_menu(screen)
                 if tmp is None:
@@ -63,7 +62,6 @@ while True:
 
     for zombie in zombies_group.sprites():
         if zombie.check_gameover():
-            save_lastlvl(lvl)
             key_left, key_right = False, False
             tmp = show_menu(screen)
             if tmp is not None:
@@ -80,11 +78,13 @@ while True:
         spawn_time.pop(0)
     if not spawn_time and not zombies_group.sprites():
         win(screen)
-        save_lastlvl(lvl)
+        save_lastlvl(lvl + 1)
         key_left, key_right = False, False
         tmp = show_menu(screen)
         if tmp is not None:
             lvl = tmp
+        else:
+            lvl = load_lastlvl()
         spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
         remove_all_sprites()
         hero.first_position()
