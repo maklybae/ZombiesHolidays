@@ -27,7 +27,7 @@ def gameover(screen: pygame.Surface):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
-            if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 return
 
         gameover_group.update()

@@ -21,7 +21,7 @@ def change_level(lvl):
     change_level_to = lvl
 
 
-def lastlvl():
+def change_to_lastlvl():
     global change_level_to
     change_level_to = None
 
@@ -67,7 +67,7 @@ class Button(pygame.sprite.Sprite):
                 self.func()
 
 
-def show_menu(screen: pygame.Surface):
+def show_menu(screen: pygame.Surface, lastlvl: int):
     global change_level_to
     change_level_to = -1
     slides = [pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT)), pygame.Surface((WIDTH, HEIGHT))]
@@ -76,15 +76,12 @@ def show_menu(screen: pygame.Surface):
     slides[2] = pygame.transform.scale(load_image('slide3.png'), SIZE)
     pygame.mouse.set_visible(False)
     Cursor()
-    Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, lastlvl)
+    Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, change_to_lastlvl)
     Button('Все уровни', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 220 + SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide, 1)
     Button('Об игре', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 240 + 2 * SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide, 2)
-    Button('1', (240, 232), SLIDE2_BUTTON_SIZE, 1, change_level, 1)
-    Button('4', (241, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_level, 4)
-    Button('2', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232), SLIDE2_BUTTON_SIZE, 1, change_level, 2)
-    Button('5', (251 + SLIDE2_BUTTON_SIZE[0] + 49, 232 + SLIDE2_BUTTON_SIZE[0] + 49), SLIDE2_BUTTON_SIZE, 1, change_level, 5)
-    Button('3', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 3)
-    Button('6', (315 + 2 * SLIDE2_BUTTON_SIZE[0] + 50, 232 + SLIDE2_BUTTON_SIZE[0] + 49), (SLIDE2_BUTTON_SIZE[0] - 2, SLIDE2_BUTTON_SIZE[1] - 2), 1, change_level, 6)
+    for i in range(1, lastlvl + 1):
+        eval(f"""Button(str({i}), {LVL_BUTTONS_COORDS[i]}, SLIDE2_BUTTON_SIZE, 1, change_level, arg={i})""")
+
     Button('Назад', (WIDTH - SLIDE1_BUTTON_SIZE[0], HEIGHT - SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 1, change_slide, 0)
     Button('Назад', (WIDTH - SLIDE1_BUTTON_SIZE[0], HEIGHT - SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 2, change_slide, 0)
 

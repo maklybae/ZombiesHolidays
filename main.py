@@ -32,22 +32,24 @@ def select_lvl_in_menu(special_flag=None):
     global lvl, spawn_zombie, spawn_coords, spawn_time, key_left, key_right, ticks
     if special_flag is not None:
         if special_flag == 'first_boot':
-            tmp = show_menu(screen)
+            tmp = show_menu(screen, load_lastlvl())
             if tmp is None:
                 lvl = load_lastlvl()
             else:
                 lvl = tmp
-        if special_flag == 'lose' or special_flag == 'win':
+        if special_flag == 'lose' or special_flag == 'win' or special_flag == 'escape':
             key_left, key_right = False, False
             if special_flag == 'lose':
                 gameover(screen)
             elif special_flag == 'win':
                 win(screen)
-                save_lastlvl(lvl + 1)
-            tmp = show_menu(screen)
+                save_lastlvl(min(max(load_lastlvl(), lvl + 1), 6))
+            tmp = show_menu(screen, load_lastlvl())
             if tmp is not None:
                 lvl = tmp
             else:
+                if special_flag == 'escape':
+                    return
                 lvl = load_lastlvl()
             remove_all_sprites()
             hero.first_position()
@@ -74,17 +76,7 @@ while True:
             if event.key == pygame.K_r:
                 hero.reload()
             if event.key == pygame.K_ESCAPE:
-                key_left, key_right = False, False
-                tmp = show_menu(screen)
-                if tmp is None:
-                    continue
-                else:
-                    lvl = tmp
-                    spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
-                    remove_all_sprites()
-                    hero.first_position()
-                    hero.reset_bullets()
-                    ticks = 0
+                select_lvl_in_menu('escape')
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 key_left = False
