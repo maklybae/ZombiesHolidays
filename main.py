@@ -11,6 +11,7 @@ import hero
 import zombies
 from tools import *
 from menu import show_menu
+from win import win
 
 
 pygame.display.set_caption('ZombiesHolidays')
@@ -77,6 +78,18 @@ while True:
     if spawn_time and ticks >= spawn_time[0]:
         eval(f'zombies.{spawn_zombie.pop(0)}({spawn_coords.pop(0)})')
         spawn_time.pop(0)
+    if not spawn_time and not zombies_group.sprites():
+        win(screen)
+        save_lastlvl(lvl)
+        key_left, key_right = False, False
+        tmp = show_menu(screen)
+        if tmp is not None:
+            lvl = tmp
+        spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
+        remove_all_sprites()
+        hero.first_position()
+        hero.reset_bullets()
+        ticks = 0
     if key_left:
         hero.left()
     if key_right:

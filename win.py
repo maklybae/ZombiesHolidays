@@ -2,6 +2,7 @@ import pygame
 import random
 from tools import *
 from constants import *
+from copy import copy
 
 
 if __name__ == '__main__':
@@ -38,20 +39,23 @@ def create_particles(position, screen, group):
         Particle(position, random.choice(numbers), random.choice(numbers), screen, group)
 
 
-def win(screen: pygame.Surface):
+def win(screen: pygame.Surface) -> None:
     clock = pygame.time.Clock()
     particles = pygame.sprite.Group()
     ticks = 0
+    screen_background = copy(screen)
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
+            if event.type == pygame.KEYDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+                return
         if ticks >= 100:
-            create_particles((random.randint(0, WIDTH), random.randint(0, HEIGHT)), screen, particles)
+            create_particles((random.randint(WIDTH // 2 - 200, WIDTH // 2), random.randint(HEIGHT // 2 - 200, HEIGHT // 2)), screen, particles)
             ticks = 0
         ticks += 1
-        screen.fill((0, 0, 0))
+        screen.blit(screen_background, (0, 0))
         particles.update()
         particles.draw(screen)
         pygame.display.flip()
