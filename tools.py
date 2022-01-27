@@ -41,3 +41,22 @@ def load_lastlvl():
 def save_lastlvl(lvl):
     with open('data/lastlvl', 'w') as f:
         f.write(str(lvl))
+
+
+def counter_pp():
+    with open('data/counter') as f:
+        k = int(f.readline().rstrip()) + 1
+    with open('data/counter', 'w') as f:
+        f.write(str(k))
+
+
+def get_counter():
+    with open('data/counter') as f:
+        return int(f.readline().rstrip())
+
+
+def reset_stat():
+    with open('data/counter', 'w') as f:
+        f.write('0')
+    with open('data/lastlvl', 'w') as f:
+        f.write('1')

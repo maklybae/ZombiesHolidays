@@ -26,6 +26,11 @@ def change_to_lastlvl():
     change_level_to = None
 
 
+def reset():
+    reset_stat()
+    terminate()
+
+
 class Cursor(pygame.sprite.Sprite):
     image = load_image('cursor3.png')
 
@@ -76,14 +81,17 @@ def show_menu(screen: pygame.Surface, lastlvl: int):
     slides[2] = pygame.transform.scale(load_image('slide3.png'), SIZE)
     pygame.mouse.set_visible(False)
     Cursor()
-    Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 200), SLIDE1_BUTTON_SIZE, 0, change_to_lastlvl)
-    Button('Все уровни', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 220 + SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide, 1)
-    Button('Об игре', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 240 + 2 * SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide, 2)
+    Button('Продолжить', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 150), SLIDE1_BUTTON_SIZE, 0, change_to_lastlvl)
+    Button('Все уровни', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 170 + SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide, 1)
+    Button('Об игре', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 190 + 2 * SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, change_slide, 2)
+    Button('Сбросить статистику', (WIDTH // 2 - SLIDE1_BUTTON_SIZE[0] // 2, 210 + 3 * SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 0, reset)
     for i in range(1, lastlvl + 1):
         eval(f"""Button(str({i}), {LVL_BUTTONS_COORDS[i]}, SLIDE2_BUTTON_SIZE, 1, change_level, arg={i})""")
-
     Button('Назад', (WIDTH - SLIDE1_BUTTON_SIZE[0], HEIGHT - SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 1, change_slide, 0)
     Button('Назад', (WIDTH - SLIDE1_BUTTON_SIZE[0], HEIGHT - SLIDE1_BUTTON_SIZE[1]), SLIDE1_BUTTON_SIZE, 2, change_slide, 0)
+
+    font = pygame.font.Font(None, 60)
+    text = font.render('Попыток: ' + str(get_counter()), True, BUTTONS_BORDER_COLOR)
 
     while True:
         for event in pygame.event.get():
@@ -103,6 +111,7 @@ def show_menu(screen: pygame.Surface, lastlvl: int):
         screen.blit(slides[cur_slide], (0, 0))
         menu_buttons_group[cur_slide].draw(screen)
         cursor_group.draw(screen)
+        screen.blit(text, (0, 0))
         pygame.display.flip()
 
 

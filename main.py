@@ -55,6 +55,7 @@ def select_lvl_in_menu(special_flag=None):
             hero.first_position()
             hero.reset_bullets()
             ticks = 0
+        counter_pp()
         spawn_time, spawn_zombie, spawn_coords = load_level(lvl)
 
 
