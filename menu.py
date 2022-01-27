@@ -92,6 +92,7 @@ def show_menu(screen: pygame.Surface, lastlvl: int):
 
     font = pygame.font.Font(None, 60)
     text = font.render('Попыток: ' + str(get_counter()), True, BUTTONS_BORDER_COLOR)
+    text_end = font.render('Игра окончена! Поздравляем!', True, BUTTONS_BORDER_COLOR)
 
     while True:
         for event in pygame.event.get():
@@ -112,6 +113,8 @@ def show_menu(screen: pygame.Surface, lastlvl: int):
         menu_buttons_group[cur_slide].draw(screen)
         cursor_group.draw(screen)
         screen.blit(text, (0, 0))
+        if lastlvl == 6:
+            screen.blit(text_end, (WIDTH - 630, 0))
         pygame.display.flip()
 
 
