@@ -1,3 +1,0 @@
-300;1300;2300;3200;3200;3200;4100;4400;4700;5000;6000;6100;6200;6300;6400;6800;6800;7500
-ZombieVarvara;ZombieVarvara;ZombieVarvara;Zombie;Zombie;Zombie;Zombie;Zombie;Zombie;ZombieVarvara;Zombie;Zombie;Zombie;Zombie;Zombie;ZombieVarvara;ZombieVarvara;ZombieVarvara
-500;100;300;750;200;500;600;200;500;300;100;220;340;460;580;100;500;500
