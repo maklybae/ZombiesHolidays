@@ -10,7 +10,7 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode(SIZE)
 
 
-class Particle(pygame.sprite.Sprite):
+class Particle(pygame.sprite.Sprite):  # класс "звездочки"
     fire = [load_image("star.png")]
     for scale in (5, 10, 20):
         fire.append(pygame.transform.scale(fire[0], (scale, scale)))
@@ -32,7 +32,7 @@ class Particle(pygame.sprite.Sprite):
             self.kill()
 
 
-def create_particles(position, screen, group):
+def create_particles(position, screen, group):  # создание "звездочек"
     particle_count = 100
     numbers = range(-5, 6)
     for _ in range(particle_count):
@@ -49,7 +49,7 @@ def win(screen: pygame.Surface) -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:  # возвращение в меню по щелчку мыши
                 return
         if ticks >= 100:
             create_particles((random.randint(WIDTH // 2 - 200, WIDTH // 2), random.randint(HEIGHT // 2 - 200, HEIGHT // 2)), screen, particles)

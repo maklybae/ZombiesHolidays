@@ -7,11 +7,11 @@ menu_buttons_group = [pygame.sprite.Group(), pygame.sprite.Group(), pygame.sprit
 cursor_group = pygame.sprite.Group()
 
 
-def remove_all_sprites():
+def remove_all_sprites():  # удаление игровых объектов с экрана
     bullets_group.empty()
     zombies_group.empty()
 
 
-def remove_all_buttons():
+def remove_all_buttons():  # удаление объектов меню с экрана
     menu_buttons_group[0].empty()
     menu_buttons_group[1].empty()

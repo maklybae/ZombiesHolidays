@@ -3,7 +3,7 @@ import pygame
 import sys
 
 
-def load_image(name, colorkey=None):
+def load_image(name, colorkey=None):  # загрузка изображений
     fullname = os.path.join('data', name)
     # если файл не существует, то выходим
     if not os.path.isfile(fullname):
@@ -20,12 +20,12 @@ def load_image(name, colorkey=None):
     return image
 
 
-def terminate():
+def terminate():  # окончание работы программы
     pygame.quit()
     sys.exit()
 
 
-def load_level(lvl_num):
+def load_level(lvl_num):  # загрузка уровня из txt
     with open(f'data/levels/lvl{lvl_num}.txt') as lvl:
         spawn_time = list(map(int, lvl.readline().rstrip().split(';')))
         spawn_zombie = lvl.readline().rstrip().split(';')
@@ -33,29 +33,29 @@ def load_level(lvl_num):
     return spawn_time, spawn_zombie, spawn_coords
 
 
-def load_lastlvl():
+def load_lastlvl():  # загрузка номера последнего уровня
     with open(f'data/lastlvl') as lvl:
         return int(lvl.readline().rstrip())
 
 
-def save_lastlvl(lvl):
+def save_lastlvl(lvl):  # сохранение последнего уровня
     with open('data/lastlvl', 'w') as f:
         f.write(str(lvl))
 
 
-def counter_pp():
+def counter_pp():  # инкремент количества попыток
     with open('data/counter') as f:
         k = int(f.readline().rstrip()) + 1
     with open('data/counter', 'w') as f:
         f.write(str(k))
 
 
-def get_counter():
+def get_counter():  # загрузка количества попыток
     with open('data/counter') as f:
         return int(f.readline().rstrip())
 
 
-def reset_stat():
+def reset_stat():  # сброс статистики
     with open('data/counter', 'w') as f:
         f.write('0')
     with open('data/lastlvl', 'w') as f:
@@ -64,12 +64,12 @@ def reset_stat():
         f.write('0')
 
 
-def set_end():
+def set_end():  # установка флага окончания игры
     with open('data/end', 'w') as f:
         f.write('1')
 
 
-def get_end():
+def get_end():  # проверка окончания игры
     with open('data/end') as f:
         if f.readline().rstrip() == '1':
             return True
